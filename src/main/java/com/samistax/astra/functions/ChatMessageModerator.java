@@ -27,13 +27,14 @@ public class ChatMessageModerator implements Function<PulsarChatMessage, PulsarC
             properties.values().stream().forEach(v -> System.out.println("Val: " + v.toString()));
             properties.keySet().stream().forEach(k -> System.out.println("Key: " + k.toString()));
 
-            OPENAI_API_KEY = ""+context.getUserConfigValueOrDefault("apikey", "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");
-            MODERATED_TOPIC = (String) properties.get("moderation_topic");
-            FLAGGED_TOPIC = (String) properties.get("flagged_topic");
-
+            if ( properties.get("apikey") != null  ) {
+                OPENAI_API_KEY = ""+context.getUserConfigValue("apikey");
+            }
             System.out.println("apikey: " + OPENAI_API_KEY);
-            System.out.println("moderation_topic: " + MODERATED_TOPIC);
-            System.out.println("flagged_topic: " + FLAGGED_TOPIC);
+
+            // Allow configuration of output topics to make the function reusable in other tenants
+            //MODERATED_TOPIC = (String) properties.get("moderation_topic");
+            //FLAGGED_TOPIC = (String) properties.get("flagged_topic");
 
             openAIService = new OpenAiService(OPENAI_API_KEY, Duration.ofSeconds(20L));
         } catch (Exception ex) {
