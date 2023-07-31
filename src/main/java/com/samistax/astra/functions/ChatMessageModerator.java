@@ -14,7 +14,7 @@ public class ChatMessageModerator implements Function<PulsarChatMessage, PulsarC
 
     private static String OPENAI_API_KEY = "YOUR_API_KEY";
     private static String MODERATED_TOPIC = "persistent://aidemo-stream/default/moderated-messages";
-    private static String FLAGGED_TOPIC = "persistent://aidemo-stream/default/flagged-messages";;
+    private static String FLAGGED_TOPIC = "persistent://aidemo-stream/default/flagged-messages";
 
     private static OpenAiService openAIService;
 
